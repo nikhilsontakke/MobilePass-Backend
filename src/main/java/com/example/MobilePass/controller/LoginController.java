@@ -6,27 +6,32 @@ import com.example.MobilePass.services.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/login")
 public class LoginController {
     @Autowired
     LoginService loginService;
 
-    @GetMapping("/useradmin")
-    public ResponseEntity<Object> validateUserAdminLoginSession(@RequestBody UserAdmin user){
+    @PostMapping("/useradmin")
+    public ResponseEntity<List<String>> validateUserAdminLoginSession(@RequestBody UserAdmin user){
+        List<String> responseMessage = new ArrayList<>();
         if(loginService.validateUser(user.getUsername(), user.getPassword())){
-            return new ResponseEntity<>("User Logged-In Successfully", HttpStatus.OK);
+            responseMessage.add("User Logged-In Successfully");
+            return new ResponseEntity<>(responseMessage, HttpStatus.OK);
         }else{
-            return new ResponseEntity<>("Invalid login credentials", HttpStatus.NOT_ACCEPTABLE);
+            responseMessage.add("Invalid login credentials");
+            return new ResponseEntity<>(responseMessage, HttpStatus.UNAUTHORIZED);
         }
     }
 
-    @GetMapping("/employee")
+    @PostMapping("/employee")
     public ResponseEntity<Object> validateEmployeeLoginSession(@RequestBody Employee employee){
         if(loginService.validateEmployee(employee.getUsername(), employee.getPassword())){
             return new ResponseEntity<>("Employee Logged-In Successfully", HttpStatus.OK);
