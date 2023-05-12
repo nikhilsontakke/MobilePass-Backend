@@ -2,21 +2,34 @@ package com.example.MobilePass.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.repository.MongoRepository;
 
 @Document("accessdoors")
 public class AccessDoor {
-    public String getId() {
+    @Id
+    Integer id;
+    String nfcId;
+    String roomId;
+
+    public Integer getId() {
         return id;
     }
 
-    public AccessDoor(String id, String roomId) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getNfcId() {
+        return nfcId;
+    }
+
+    public AccessDoor(Integer id, String nfcId, String roomId) {
+        this.id = id;
+        this.nfcId = nfcId;
         this.roomId = roomId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setNfcId(String nfcId) {
+        this.nfcId = nfcId;
     }
 
     public String getRoomId() {
@@ -26,8 +39,4 @@ public class AccessDoor {
     public void setRoomId(String roomId) {
         this.roomId = roomId;
     }
-
-    @Id
-    String id;
-    String roomId;
 }

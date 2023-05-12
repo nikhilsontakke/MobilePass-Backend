@@ -21,7 +21,7 @@ public class AccessController {
     public ResponseEntity<Object> validateUserAccess(@RequestBody ActivityLog newActivityLog){
 
         if(employeeService.ifEmployeeExists(newActivityLog.getUsername())){
-            if(accessDoorRepository.existsById(newActivityLog.getDoorId())){
+            if(accessDoorRepository.existsByNfcId(newActivityLog.getDoorId())){
                 System.out.println("---------------------------------------");
                 System.out.println("Access granted for door ID = "+newActivityLog.getDoorId()+" to employee - "+newActivityLog.getName());
                 activityLogRepository.save(newActivityLog);
