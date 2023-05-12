@@ -6,8 +6,17 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document("activitylogs")
 public class ActivityLog {
     String name;
+    String nfcId;
     String username;
     String doorId;
+
+    public String getNfcId() {
+        return nfcId;
+    }
+
+    public void setNfcId(String nfcId) {
+        this.nfcId = nfcId;
+    }
 
     public String getName() {
         return name;
@@ -33,10 +42,10 @@ public class ActivityLog {
         this.doorId = doorId;
     }
 
-    public ActivityLog(String name, String username, String doorId) {
+    public ActivityLog(String name, String nfcId, String username, String doorId) {
         this.name = name;
+        this.nfcId = nfcId;
         this.username = username;
         this.doorId = doorId;
     }
-
 }
