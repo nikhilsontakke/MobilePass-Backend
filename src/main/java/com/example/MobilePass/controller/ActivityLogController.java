@@ -9,15 +9,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin("*")
+
+//@CrossOrigin(origins = "http://localhost:4200/home")
 @RequestMapping("/activitylogs")
 public class ActivityLogController {
     @Autowired
     ActivityLogService activityLogService;
     @Autowired
     ActivityLogRepository activityLogRepository;
-
-    @GetMapping
+    @CrossOrigin("*")
+    @GetMapping()
     public ResponseEntity<Object> getAllActivities(){
         return new ResponseEntity<>(activityLogService.getAllRecords(), HttpStatus.OK);
     }

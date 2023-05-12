@@ -25,7 +25,7 @@ public class LoginController {
     private EmployeeService employeeService;
     @Autowired
     private EmployeeRepository employeeRepository;
-
+    @CrossOrigin("*")
     @PostMapping("/useradmin")
     public ResponseEntity<List<String>> validateUserAdminLoginSession(@RequestBody UserAdmin user){
         List<String> responseMessage = new ArrayList<>();
